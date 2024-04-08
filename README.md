@@ -32,36 +32,36 @@ Proses training dilakukan dengan melatih dataset untuk mengenali object yang sud
 
 ### Hasil Training 
 Hasil dari training dapat dilihat pada gambar berikut
-![evaluasi](models\predict1\confusion_matrix.png)
+![evaluasi](https://github.com/sitifatim/apd-detection/blob/main/models/predict1/confusion_matrix.png)
 
-Dari gambar confusion matrix diatas dapat dilihat bahwa hanya sedikit dari gambar yang mismatch prediction. Adapun untuk evaluasi model, YOLO menggunakan mAP atau Mean Average Precision yang adalah metrik yang umum digunakan untuk mengevaluasi kinerja sistem deteksi objek dan hasilnya adalah sebagai berikut ![gambar](assets\image.png)
+Dari gambar confusion matrix diatas dapat dilihat bahwa hanya sedikit dari gambar yang mismatch prediction. Adapun untuk evaluasi model, YOLO menggunakan mAP atau Mean Average Precision yang adalah metrik yang umum digunakan untuk mengevaluasi kinerja sistem deteksi objek dan hasilnya adalah sebagai berikut ![gambar](https://github.com/sitifatim/apd-detection/blob/main/assets/image.png)
 
 ### Evaluasi
 Berikut merupakan evaluasi model yang dilakukan menggunakan data validasi
-![gambar](models\predict1\val_batch0_pred.jpg)
+![gambar](https://github.com/sitifatim/apd-detection/blob/main/models/predict1/val_batch0_pred.jpg)
 
 Sedangkan untuk evaluasi model menggunakan data test atau data yang belum terlihat model saat melakukan proses latih (training) adalah seperti berikut
-![gambar](assets\test.jpg)
+![gambar](https://github.com/sitifatim/apd-detection/blob/main/assets/test.jpg)
 
 
 ## Integrasi Model
 Integrasi model dilakukan menggunakan framework Flask, yaitu web framework dari Python. Input dari model dapat berupa gambar, video, dan rtsp (real time streaming protocol). Tampilan awal web adalah sebagai berikut dengan menginputkan gambar/video/rtsp
-![index](assets\1.png)
+![index](https://github.com/sitifatim/apd-detection/blob/main/assets/1.png)
 
 Sedangkan gambar berikut adalah hasil dari prediksi gambar dengan model menggunakan input gambar
-![gambar](assets\2.png)
+![gambar](https://github.com/sitifatim/apd-detection/blob/main/assets/2.png)
 
 Dari gambar diatas dapat dilihat bahwa selain model dapat memprediksi apd, namun juga dari sisi web mampu menampilkan apd yang terdeteksi sehingga membantu tracking lebih baik.
 
 Untuk hasil dari inputan dengan video dapat dilihat pada gambar berikut
-![hmb](assets\4.png)
+![hmb](https://github.com/sitifatim/apd-detection/blob/main/assets/4.png)
 Namun sayangnya, hasil dari inputan video masih belum maksimal karena model gagal mendeteksi apd pada manusia yang ada di dalam video. Hal ini bisa terjadi dikarenakan beberapa hal diantaranya:
 * Video diambil terlalu jauh sedangkan rata-rata dataset yang ada menggunakan angle dari depan, bukan dari cctv sehingga ini mempengaruhi model yang gagal mendeteksi dengan angle cctv
 * Dataset yang digunakan untuk proses latih masih terlalu sedikit 
 
 Apapun beberapa hal yang saya lakukan untuk mengatasi jeleknya hasil prediksi model yaitu:
 * Menggunakan dua model, satu menggunakan model dari YOLOv8 pre trained untuk mendeteksi bentuk manusia terlebih dahulu, baru kemudian dari deteksi bentuk manusia, dideteksi lagi menggunakan model deteksi apd. Akan tetapi solusi ini tidak berjalan baik ketika digunakan pada video yang bentuk manusia nya terlalu jauh atau kecil. Namun, solusi ini masih dapat berjalan ketika objek manusia tidak terlalu kecil seperti di gambar berikut. Meskipun begitu, model apd masih gagal untuk mendeteksi meskipun sudah dibatasi untuk deteksi nya dari objek manusia saja. Hal ini terjadi kemungkinan karena model belum mengenali dataset dengan angle tersebut dan ada kemungkinan juga hasil objek manusia tidak memiliki kualitas yang jernih sehingga menyulitkan model apd untuk mendetkesi
-![gmb](assets\3.png)
+![gmb](https://github.com/sitifatim/apd-detection/blob/main/assets/3.png)
 * Training ulang dengan epoch yang berbeda
 
 
