@@ -2,6 +2,11 @@ from flask import Flask, render_template, jsonify, request, Response, redirect, 
 import requests
 import os
 
+from dotenv import load_dotenv
+from db.database import *
+from db.model import *
+from db.queries import *
+
 import cv2
 from helper import *
 
@@ -25,7 +30,8 @@ def save_upload_image():
 
 @app.route('/image_detection')
 def image_detection():
-    return render_template("image.html")
+    image_detect = get_image_detect()
+    return render_template("image.html", image_detect=image_detect)
 
 @app.route('/image_frame')
 def image_frame():
@@ -48,7 +54,8 @@ def save_upload_video():
 
 @app.route('/video_detection')
 def video_detection():
-    return render_template("video.html")
+    video_detect = get_image_detect()
+    return render_template("video.html", video_detect=video_detect)
 
 @app.route('/video_frame')
 def video_frame():
@@ -60,5 +67,17 @@ def input_rtsp():
     return render_template('input_video.html')
 
 
+@app.route('/detectToday')
+def detectToday():
+    rowdetect = get_detect_today()
+    return jsonify({'rowdetect': rowdetect})
+
+@app.route('/loadDataFR', methods=['GET'])
+def loadDataFR():
+    data = get_data_detect()
+    return jsonify(response= data)
+
+
 if __name__=="__main__":
+    Base.metadata.create_all(engine)
     app.run(host='0.0.0.0', port=8082, debug=True)

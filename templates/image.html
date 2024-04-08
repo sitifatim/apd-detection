@@ -109,22 +109,32 @@
                                         <div class="card">
                                             <div class="card-header card-header-stretch">
                                             <div class="card-title">
-                                                <h3>Today Absence</h3>
+                                                <h3>APD Terdeteksi</h3>
                                             </div>
                                             </div>
                                             <div class="tab-content" id="kt_reffered_users_tab_content">
                                             <div class="table-responsive" style="height:590px; overflow-y:auto;">
                                                 <table class="table table-row-boredered align-middle gy-6">
-                                                <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
-                                                    <tr>
-                                                    <th class="min-w-100px ps-9">Recognize</th>
-                                                    
-                                                    <th class="min-w-100px">Detect Image</th>
-                                                    <th class="min-w-100px">Time</th>
-                                                    </tr>
-                                                    <tbody id="scandata" class="fs-6 fw-semibold text-gray-600"></tbody>
-                                                </thead>
-                                                </table>
+												<thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
+													<tr>                                                    
+														<th class="min-w-100px ps-9">APD</th>
+														<th class="min-w-100px">Time</th>
+													</tr>
+												</thead>
+												<tbody>
+													{% for row in image_detect %}
+													<tr>
+														<td>
+															<div class="symbol symbol-100px me-5">
+																<img src="data:image/jpeg;base64,{{ row[0] }}" style="width: 100px; height: 100px;" />
+															</div>
+														</td>
+														<td>{{ row[1] }}</td>
+													</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+
                                             </div>
                                             </div>
                                         </div>
@@ -142,6 +152,69 @@
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{url_for('static',filename='plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{url_for('static',filename='js/scripts.bundle.js')}}"></script>
+	// 	<script type="text/javascript">
+    //     $(document).ready(function() {
+    //         // var idUuidHolder = document.getElementById("idUuidHolder");
+    //         // var id_uuid = idUuidHolder.getAttribute("data-id_uuid");
+    //         let lastcnt = 0;
+    //         let cnt;
+    //         chkNewScan();
+
+    //         function chkNewScan() {
+    //             countTodayScan();
+    //             // reloadTable();
+    //             setTimeout(chkNewScan, 1000);
+    //         }
+
+    //         function countTodayScan() {
+    //             $.ajax({
+    //                 url: '/detectToday',
+    //                 type: 'GET',
+    //                 dataType: 'json',
+    //                 success: function(data) {
+    //                     cnt = data.rowdetect;
+	// 					console.log(cnt);
+    //                     if (cnt > lastcnt) {
+    //                         reloadTable();
+    //                     }
+
+    //                     lastcnt = cnt;
+    //                 },
+    //                 error: function(result) {
+    //                     console.log('no result!')
+    //                 }
+    //             })
+    //         }
+
+    //         function reloadTable() {
+    //             $.ajax({
+    //                 url:'/loadDataFR',
+    //                 type: 'GET',
+    //                 dataType: 'json',
+    //                 success: function(response) {
+    //                     var tr = $("#scandata");
+    //                     tr.empty();
+
+    //                     $.each(response, function(index, item) {
+    //                         console.log('Item:', item);
+    //                         if (item.length > 0) {
+    //                             for (let i = 0; i < item.length; i++) {
+    //                                 tr.append('<tr>' +
+    //                                     '<td><div class="symbol symbol-100px me-5"><img src="data:image/jpeg;base64,' + item[i][0] + '" style="width: 100px; height: 100px;" /></div></td>' +
+    //                                     '<td>' + item[i][1] + '</td>' +
+    //                                     '</tr>');
+    //                             }
+    //                         }
+    //                     });
+
+    //                 },
+    //                 error: function(result) {
+    //                     console.log('no result!')
+    //                 }
+    //             });
+    //         }
+    //     });
+    // </script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Vendors Javascript(used for this page only)-->
 		<script src="{{url_for('static',filename = 'plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>

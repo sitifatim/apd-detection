@@ -94,7 +94,7 @@
                                         <div class="card mb-5 mb-xxl-12">
                                         <div class="card-header card-header-stretch">
                                             <div class="card-title">
-                                                <h3>APD Image Detection</h3>
+                                                <h3>APD Video Detection</h3>
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -115,16 +115,25 @@
                                             <div class="tab-content" id="kt_reffered_users_tab_content">
                                             <div class="table-responsive" style="height:590px; overflow-y:auto;">
                                                 <table class="table table-row-boredered align-middle gy-6">
-                                                <thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
-                                                    <tr>
-                                                    <th class="min-w-100px ps-9">Recognize</th>
-                                                    
-                                                    <th class="min-w-100px">Detect Image</th>
-                                                    <th class="min-w-100px">Time</th>
-                                                    </tr>
-                                                    <tbody id="scandata" class="fs-6 fw-semibold text-gray-600"></tbody>
-                                                </thead>
-                                                </table>
+													<thead class="border-bottom border-gray-200 fs-6 fw-bold bg-lighten">
+														<tr>                                                    
+															<th class="min-w-100px ps-9">APD</th>
+															<th class="min-w-100px">Time</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% for row in video_detect %}
+														<tr>
+															<td>
+																<div class="symbol symbol-100px me-5">
+																	<img src="data:image/jpeg;base64,{{ row[0] }}" style="width: 100px; height: 100px;" />
+																</div>
+															</td>
+															<td>{{ row[1] }}</td>
+														</tr>
+														{% endfor %}
+													</tbody>
+												</table>
                                             </div>
                                             </div>
                                         </div>
